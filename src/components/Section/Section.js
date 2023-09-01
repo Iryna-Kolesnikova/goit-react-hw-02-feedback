@@ -1,8 +1,9 @@
+import { SectionFeedback } from './Section.styled';
 export const Section = ({ title, children }) => {
   return (
-    <div>
+    <SectionFeedback>
       <h2>{title}</h2>
       {children}
-    </div>
+    </SectionFeedback>
   );
 };
