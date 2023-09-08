@@ -12,16 +12,14 @@ export class App extends Component {
   };
 
   countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
-    return good + neutral + bad;
+    const values = Object.values(this.state);
+    return values.reduce((total, value) => total + value, 0);
   };
 
   countPositiveFeedbackPercentage = () => {
+    const { good } = this.state;
     const totalFeedback = this.countTotalFeedback();
-    const positiveFeedback = this.state.good;
-    return totalFeedback > 0
-      ? ((positiveFeedback / totalFeedback) * 100).toFixed(0)
-      : 0;
+    return totalFeedback > 0 ? ((good / totalFeedback) * 100).toFixed(0) : 0;
   };
 
   handleFeedback = option => {
@@ -35,7 +33,7 @@ export class App extends Component {
       <div>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={['good', 'neutral', 'bad']}
+            options={Object.keys(this.state)}
             onLeaveFeedback={this.handleFeedback}
           />
         </Section>
